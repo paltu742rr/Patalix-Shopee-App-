@@ -3,88 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patalix Shopee App</title>
+    <title>Patalix Shopee - Secure Access</title>
     <style>
+        :root {
+            --cobalt-blue: #0047AB;
+            --premium-white: #F8F9FA;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffffff; /* सफेद बैकग्राउंड */
-            margin: 0;
+            background-color: var(--premium-white);
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
-        .app-container {
-            width: 90%;
-            max-width: 400px;
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
             text-align: center;
-            border: 1px solid #e0e0e0;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 380px;
+            border: 1px solid #eee;
         }
-        .header {
-            color: #003399; /* गहरा नीला */
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .zara-box {
-            margin: 20px 0;
-        }
-        .zara-img {
-            width: 100px;
+        .zara-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00c3ff, #0047AB);
             border-radius: 50%;
-            border: 3px solid #00c3ff; /* एक्वा नीला */
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,71,171,0.2);
         }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        input[type="password"] {
+        .zara-avatar img { width: 50px; filter: brightness(0) invert(1); }
+        h1 { color: var(--cobalt-blue); font-size: 28px; margin-bottom: 5px; font-weight: 800; }
+        p { color: #666; margin-bottom: 30px; font-size: 14px; }
+        .input-box {
+            background: #f0f2f5;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px;
             width: 80%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 18px;
+            font-size: 24px;
+            letter-spacing: 10px;
             text-align: center;
+            transition: 0.3s;
+            outline: none;
         }
-        .btn-blue {
-            background-color: #003399; /* भरोसेमंद गहरा नीला */
+        .input-box:focus { border-color: var(--cobalt-blue); background: white; }
+        .unlock-btn {
+            background: var(--cobalt-blue);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 15px 40px;
+            border-radius: 15px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-            width: 85%;
+            width: 100%;
+            margin-top: 25px;
+            transition: transform 0.2s;
         }
-        .footer-text {
-            font-size: 12px;
-            color: gray;
-            margin-top: 20px;
-        }
+        .unlock-btn:active { transform: scale(0.98); }
+        .footer { font-size: 10px; color: #aaa; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="header">Patalix Shopee</div>
-    
-    <div class="zara-box">
-        <img src="https://via.placeholder.com/100" alt="Zara AI" class="zara-img">
-        <p><strong>ज़ारा:</strong> नमस्ते गौरव! अपना PIN डालें।</p>
+<div class="login-card">
+    <div class="zara-avatar">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
     </div>
+    <h1>Patalix Shopee</h1>
+    <p id="zara-text">प्रोटोकॉल सक्रिय। कृपया अपनी पहचान सत्यापित करें।</p>
 
-    <div class="input-group">
-        <input type="password" placeholder="••••" maxlength="4">
-    </div>
+    <input type="password" class="input-box" id="userPin" maxlength="4" placeholder="••••">
 
-    <button class="btn-blue">Unlock App</button>
+    <button class="unlock-btn" id="loginBtn">ACCESS SYSTEM</button>
 
-    <div class="footer-text">
-        Sourced from Flipkart API | Secured by Patalix
-    </div>
+    <div class="footer">Encrypted by Patalix OS Build</div>
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>
