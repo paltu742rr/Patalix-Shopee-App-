@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Tracking - Patalix Shopee</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; padding: 20px; }
+        .track-container { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .status-bar { border-left: 3px dashed #003399; margin-left: 20px; padding-left: 20px; }
+        .step { margin-bottom: 30px; position: relative; }
+        .step.active { color: #003399; font-weight: bold; }
+        .step.active::before { content: '🚚'; position: absolute; left: -35px; background: white; }
+        .zara-update { background: #e3f2fd; padding: 15px; border-radius: 10px; border-left: 5px solid #2196f3; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="track-container">
+        <h2>ऑर्डर ट्रैकिंग (Sourced from Flipkart)</h2>
+        <p>ऑर्डर ID: #PX12345678</p>
+        
+        <div class="status-bar">
+            <div class="step">✅ वेयरहाउस (अमेरिका) से निकला</div>
+            <div class="step">✅ पटना हब पहुँचा</div>
+            <div class="step active">🚚 मुजफ्फरपुर हब (अभी यहाँ है)</div>
+            <div class="step" style="color: gray;">⚪ आपके घर के लिए निकला</div>
+        </div>
+
+        <div class="zara-update">
+            <strong>ज़ारा (Zara):</strong> गौरव, अच्छी खबर है! आपका मोटोरोला फोन मुजफ्फरपुर पहुँच गया है। बस कुछ ही घंटों की बात है!
+        </div>
+        
+        <button onclick="window.location.href='product.html'" style="margin-top:20px; padding:10px; border-radius:5px; border:none; background:#003399; color:white; width:100%;">वापस शॉपिंग पर जाएँ</button>
+    </div>
+</body>
+</html>
