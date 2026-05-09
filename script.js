@@ -1,16 +1,23 @@
-// Patalix Shopee App - Logic
-function unlockApp() {
-    const pinInput = document.querySelector('input[type="password"]').value;
-    const correctPin = "2027"; // तुम्हारा तय किया हुआ पिन
+document.getElementById('loginBtn').addEventListener('click', function() {
+    const pin = document.getElementById('userPin').value;
+    const correctPin = "2027"; 
 
-    if (pinInput === correctPin) {
-        alert("Patalix Shopee अनलॉक हो गया!");
-        window.location.href = "product.html"; // सही पिन पर प्रोडक्ट पेज पर ले जाएगा
+    // Fake Database (Asli mein hum ise data.json se layenge)
+    const db = {
+        "2027": "Gaurav Kumar"
+    };
+
+    if (pin === correctPin) {
+        const userName = db[pin];
+        document.getElementById('zara-text').innerText = `नमस्ते ${userName}! सिस्टम अनलॉक हो रहा है...`;
+        document.getElementById('zara-text').style.color = "#0047AB";
+        
+        // 1.5 second baad product page par bhej dega
+        setTimeout(() => {
+            window.location.href = "product.html";
+        }, 1500);
     } else {
-        alert("गलत पिन! कृपया फिर से कोशिश करें।");
+        alert("ACCESS DENIED: पिन गलत है।");
+        document.getElementById('userPin').value = "";
     }
-}
-
-// बटन क्लिक होने पर फंक्शन चलाएं
-document.querySelector('.btn-blue').addEventListener('click', unlockApp);
-
+});
