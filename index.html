@@ -3,91 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patalix Shopee - Secure Access</title>
+    <title>Patalix Shopee - Secure Login</title>
     <style>
         :root {
-            --cobalt-blue: #0047AB;
-            --premium-white: #F8F9FA;
+            --cobalt-blue: #0047AB; /* वो गहरा, प्रीमियम नीला */
+            --light-blue: #E3F2FD;
+            --pure-white: #FFFFFF;
         }
         body {
-            background-color: var(--premium-white);
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--pure-white);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            color: #333;
         }
-        .login-card {
-            background: white;
+        .app-container {
+            background: #fff;
             padding: 40px;
             border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
             text-align: center;
             width: 100%;
             max-width: 380px;
             border: 1px solid #eee;
         }
-        .zara-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #00c3ff, #0047AB);
+        .zara-box {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00c3ff, var(--cobalt-blue));
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 20px rgba(0,71,171,0.2);
+            box-shadow: 0 10px 25px rgba(0,71,171,0.2);
+            position: relative;
         }
-        .zara-avatar img { width: 50px; filter: brightness(0) invert(1); }
-        h1 { color: var(--cobalt-blue); font-size: 28px; margin-bottom: 5px; font-weight: 800; }
-        p { color: #666; margin-bottom: 30px; font-size: 14px; }
-        .input-box {
-            background: #f0f2f5;
-            border: 2px solid transparent;
-            border-radius: 15px;
-            padding: 15px;
+        /* Zara का आइकॉन (Placeholder) */
+        .zara-box::after {
+            content: 'Z';
+            font-size: 40px;
+            color: white;
+            font-weight: bold;
+        }
+        h1 {
+            color: var(--cobalt-blue);
+            font-size: 28px;
+            margin: 0 0 10px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .status-text {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        input[type="password"] {
             width: 80%;
+            padding: 15px 20px;
             font-size: 24px;
-            letter-spacing: 10px;
             text-align: center;
-            transition: 0.3s;
+            letter-spacing: 12px;
+            border-radius: 15px;
+            border: 2px solid #ddd;
+            background: #fcfcfc;
+            transition: all 0.3s;
             outline: none;
         }
-        .input-box:focus { border-color: var(--cobalt-blue); background: white; }
+        input[type="password"]:focus {
+            border-color: var(--cobalt-blue);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,71,171,0.1);
+        }
         .unlock-btn {
-            background: var(--cobalt-blue);
+            background-color: var(--cobalt-blue);
             color: white;
             border: none;
             padding: 15px 40px;
             border-radius: 15px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-top: 25px;
-            transition: transform 0.2s;
+            transition: transform 0.1s, box-shadow 0.2s;
+            letter-spacing: 1px;
         }
-        .unlock-btn:active { transform: scale(0.98); }
-        .footer { font-size: 10px; color: #aaa; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .unlock-btn:hover {
+            box-shadow: 0 8px 20px rgba(0,71,171,0.3);
+        }
+        .unlock-btn:active {
+            transform: scale(0.97);
+        }
+        .footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <div class="zara-avatar">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
-    </div>
+<div class="app-container">
+    <div class="zara-box"></div>
     <h1>Patalix Shopee</h1>
-    <p id="zara-text">प्रोटोकॉल सक्रिय। कृपया अपनी पहचान सत्यापित करें।</p>
+    <p class="status-text" id="zaraStatus">नमस्ते! ज़ारा सक्रिय है। कृपया अपना PIN दर्ज करें।</p>
 
-    <input type="password" class="input-box" id="userPin" maxlength="4" placeholder="••••">
+    <div class="input-group">
+        <input type="password" id="userPin" maxlength="4" placeholder="••••">
+    </div>
 
-    <button class="unlock-btn" id="loginBtn">ACCESS SYSTEM</button>
+    <button class="unlock-btn" onclick="verifyPin()">सत्यापित करें</button>
 
-    <div class="footer">Encrypted by Patalix OS Build</div>
+    <div class="footer">Sourced from Flipkart API | Secured Build</div>
 </div>
 
-<script src="script.js"></script>
+<script>
+    function verifyPin() {
+        const pin = document.getElementById('userPin').value;
+        const correctPin = "2127"; // गौरव का असली पिन!
+
+        if (pin === correctPin) {
+            document.getElementById('zaraStatus').innerText = "सत्यापन सफल! स्वागत है, गौरव।";
+            document.getElementById('zaraStatus').style.color = "#0047AB";
+            // 1.5 second baad product page par bhej dega
+            setTimeout(() => {
+                window.location.href = "product.html";
+            }, 1500);
+        } else {
+            alert("पिन गलत है! फिर से कोशिश करें।");
+            document.getElementById('userPin').value = ""; // Clear input
+        }
+    }
+</script>
+
 </body>
 </html>
