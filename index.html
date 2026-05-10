@@ -2,72 +2,79 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Patalix Shopee Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patalix 404 - Broken Connection</title>
     <style>
         /* --- HIGH-END UI DESIGN --- */
         :root {
             --cobalt: #0047AB;
-            --glass: rgba(255, 255, 255, 0.95);
+            --pure-white: #FFFFFF;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            background: #f4f7fa; /* Premium Light Gray/White */
+            background: #111; /* Dark Background */
             font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--pure-white);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             overflow: hidden;
         }
 
-        /* Full Screen Container */
-        .app-wrapper {
+        /* Broken Container */
+        .broken-container {
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            background: linear-gradient(180deg, #FFFFFF 0%, #E3F2FD 100%);
+            padding: 20px; text-align: center;
+            position: relative;
         }
 
-        .screen {
-            display: none; width: 100%; height: 100%;
-            padding: 40px 20px; text-align: center;
-            animation: slideUp 0.4s ease-out;
-        }
-        .active { display: flex; flex-direction: column; align-items: center; }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* Glass Break Effect */
+        .glass-break {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0));
+            zara-glow: radial-gradient(circle, rgba(0,71,171,0.2), rgba(0,0,0,0.8));
+            opacity: 0.5;
+            z-index: -1;
         }
 
-        /* Zara High-Tech Avatar */
-        .zara-glow {
+        /* Broken Text */
+        .broken-text {
+            font-size: 150px; font-weight: 900;
+            color: #222; text-shadow: 0 0 10px var(--cobalt), 0 0 20px var(--cobalt), 0 0 30px var(--cobalt);
+            margin: 0;
+        }
+
+        /* Zara High-Tech Icon (Broken) */
+        .zara-box {
             width: 120px; height: 120px;
             background: var(--cobalt);
             border-radius: 40px; /* Modern Squircle shape */
-            margin-bottom: 30px;
+            margin-top: 50px;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 20px 40px rgba(0, 71, 171, 0.2);
             border: 4px solid white;
+            position: relative;
         }
-        .zara-glow svg { width: 60px; height: 60px; fill: white; }
+        .zara-box::before {
+            content: 'Z'; color: white; font-size: 60px; font-weight: bold;
+        }
+        .zara-box::after {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(0,0,0,0));
+            opacity: 0.5;
+            border-radius: 40px;
+        }
 
         h1 { color: var(--cobalt); font-size: 34px; font-weight: 900; margin: 0; letter-spacing: -1.5px; }
         .subtitle { color: #555; font-size: 16px; margin-top: 10px; margin-bottom: 40px; }
 
-        /* Premium Input */
-        .pin-field {
-            width: 100%; max-width: 300px;
-            background: white; border: 2px solid #eee;
-            border-radius: 20px; padding: 20px;
-            font-size: 32px; text-align: center;
-            letter-spacing: 15px; color: var(--cobalt);
-            outline: none; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-        }
-        .pin-field:focus { border-color: var(--cobalt); box-shadow: 0 10px 25px rgba(0,71,171,0.1); }
-
-        /* Action Button */
-        .main-btn {
+        /* Go Back Button */
+        .go-back-btn {
             background: var(--cobalt); color: white; border: none;
             width: 100%; max-width: 300px; padding: 20px;
             border-radius: 20px; font-size: 18px; font-weight: 700;
@@ -75,66 +82,27 @@
             box-shadow: 0 10px 20px rgba(0,71,171,0.3);
             transition: 0.2s;
         }
-        .main-btn:active { transform: scale(0.96); }
+        .go-back-btn:active { transform: scale(0.96); }
 
-        /* Footer Info */
+        /* Broken Footer */
         .system-id { position: absolute; bottom: 30px; font-size: 12px; color: #aaa; letter-spacing: 2px; }
 
     </style>
 </head>
 <body>
 
-    <div class="app-wrapper">
-        <div id="login" class="screen active">
-            <div class="zara-glow">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/></svg>
-            </div>
-            <h1>Patalix Shopee</h1>
-            <p class="subtitle" id="status">सिस्टम एन्क्रिप्शन सक्रिय।</p>
-            
-            <input type="password" id="pin" class="pin-field" maxlength="4" placeholder="••••">
-            
-            <button class="main-btn" onclick="verify()">सत्यापित करें</button>
-            
-            <div class="system-id">PATALIX OS BUILD v1.0</div>
-        </div>
-
-        <div id="product" class="screen" style="justify-content: flex-start;">
-            <div style="width:100%; text-align: left; padding: 10px 0;">
-                <h2 style="color:var(--cobalt); margin:0;">Welcome, Gaurav</h2>
-                <p style="color:#777; margin:5px 0 20px 0;">Flipkart Live Data Dashboard</p>
-            </div>
-            <div style="background:white; width:100%; height:300px; border-radius:30px; box-shadow:0 10px 30px rgba(0,0,0,0.05); overflow:hidden;">
-                <div style="padding:20px;">
-                    <span style="background:#E3F2FD; color:var(--cobalt); padding:5px 12px; border-radius:10px; font-size:12px; font-weight:bold;">SMARTPHONE</span>
-                    <h3 style="margin:15px 0 5px 0;">Motorola Edge 50 Pro</h3>
-                    <p style="color:#2874f0; font-size:24px; font-weight:bold; margin:0;">₹29,999</p>
-                </div>
-                <div style="height:150px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; color:#ccc;">
-                    Image Placeholder
-                </div>
-            </div>
-            <button class="main-btn" style="margin-top:auto;" onclick="location.reload()">Logout System</button>
-        </div>
+    <div class="broken-container">
+        <div class="glass-break"></div>
+        <div class="broken-text">404</div>
+        <h1>Patalix connection error</h1>
+        <p class="subtitle" id="zaraStatus">नमस्ते! ज़ारा सक्रिय है। कृपया अपना PIN दर्ज करें।</p>
+        
+        <div class="zara-box"></div>
+        
+        <button class="go-back-btn" onclick="window.history.back()">वापस जाएँ</button>
+        
+        <div class="system-id">PATALIX OS BUILD v1.0</div>
     </div>
 
-    <script>
-        function verify() {
-            const pinValue = document.getElementById('pin').value;
-            const statusText = document.getElementById('status');
-
-            if(pinValue === "2127") {
-                statusText.innerText = "स्वागत है गौरव! एक्सेस ग्रांटेड।";
-                statusText.style.color = "var(--cobalt)";
-                setTimeout(() => {
-                    document.getElementById('login').classList.remove('active');
-                    document.getElementById('product').classList.add('active');
-                }, 1000);
-            } else {
-                alert("ACCESS DENIED: कृपया सही पिन डालें।");
-                document.getElementById('pin').value = "";
-            }
-        }
-    </script>
 </body>
 </html>
