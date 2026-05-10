@@ -3,105 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patalix 404 - Broken Connection</title>
+    <title>Patalix Shopee - Pro</title>
     <style>
-        /* --- HIGH-END UI DESIGN --- */
-        :root {
-            --cobalt: #0047AB;
-            --pure-white: #FFFFFF;
-        }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            background: #111; /* Dark Background */
-            font-family: 'Inter', -apple-system, sans-serif;
-            color: var(--pure-white);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            overflow: hidden;
-        }
+        :root { --cobalt: #0047AB; --bg: #f5f7fa; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); }
+        
+        /* Top Navigation */
+        .top-nav { background: var(--cobalt); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Category Menu */
+        .categories { display: flex; overflow-x: auto; background: white; padding: 10px; gap: 15px; border-bottom: 1px solid #ddd; }
+        .cat-item { font-size: 12px; text-align: center; color: #555; }
 
-        /* Broken Container */
-        .broken-container {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            padding: 20px; text-align: center;
-            position: relative;
-        }
-
-        /* Glass Break Effect */
-        .glass-break {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0));
-            zara-glow: radial-gradient(circle, rgba(0,71,171,0.2), rgba(0,0,0,0.8));
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        /* Broken Text */
-        .broken-text {
-            font-size: 150px; font-weight: 900;
-            color: #222; text-shadow: 0 0 10px var(--cobalt), 0 0 20px var(--cobalt), 0 0 30px var(--cobalt);
-            margin: 0;
-        }
-
-        /* Zara High-Tech Icon (Broken) */
-        .zara-box {
-            width: 120px; height: 120px;
-            background: var(--cobalt);
-            border-radius: 40px; /* Modern Squircle shape */
-            margin-top: 50px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 20px 40px rgba(0, 71, 171, 0.2);
-            border: 4px solid white;
-            position: relative;
-        }
-        .zara-box::before {
-            content: 'Z'; color: white; font-size: 60px; font-weight: bold;
-        }
-        .zara-box::after {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(0,0,0,0));
-            opacity: 0.5;
-            border-radius: 40px;
-        }
-
-        h1 { color: var(--cobalt); font-size: 34px; font-weight: 900; margin: 0; letter-spacing: -1.5px; }
-        .subtitle { color: #555; font-size: 16px; margin-top: 10px; margin-bottom: 40px; }
-
-        /* Go Back Button */
-        .go-back-btn {
-            background: var(--cobalt); color: white; border: none;
-            width: 100%; max-width: 300px; padding: 20px;
-            border-radius: 20px; font-size: 18px; font-weight: 700;
-            margin-top: 30px; cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,71,171,0.3);
-            transition: 0.2s;
-        }
-        .go-back-btn:active { transform: scale(0.96); }
-
-        /* Broken Footer */
-        .system-id { position: absolute; bottom: 30px; font-size: 12px; color: #aaa; letter-spacing: 2px; }
-
+        /* Product Card */
+        .product-card { background: white; margin: 15px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .product-img { width: 100%; height: auto; display: block; }
+        .details { padding: 20px; }
+        .brand { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .name { font-size: 20px; font-weight: bold; margin: 5px 0; color: #333; }
+        .price { color: #2874f0; font-size: 26px; font-weight: bold; }
+        
+        .buy-btn { background: #fb641b; color: white; border: none; width: 100%; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 10px; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <div class="broken-container">
-        <div class="glass-break"></div>
-        <div class="broken-text">404</div>
-        <h1>Patalix connection error</h1>
-        <p class="subtitle" id="zaraStatus">नमस्ते! ज़ारा सक्रिय है। कृपया अपना PIN दर्ज करें।</p>
-        
-        <div class="zara-box"></div>
-        
-        <button class="go-back-btn" onclick="window.history.back()">वापस जाएँ</button>
-        
-        <div class="system-id">PATALIX OS BUILD v1.0</div>
+    <div class="top-nav">
+        <b>Patalix Shopee</b>
+        <span>🔍</span>
+    </div>
+
+    <div class="categories">
+        <div class="cat-item">Mobiles</div>
+        <div class="cat-item">Fashion</div>
+        <div class="cat-item">Electronics</div>
+        <div class="cat-item">Home</div>
+    </div>
+
+    <div class="product-card">
+        <img src="https://static.toiimg.com/thumb/msid-109348232,width-1280,height-720,resizemode-4/109348232.jpg" class="product-img" alt="Motorola Edge 50 Pro">
+        <div class="details">
+            <span class="brand">Motorola</span>
+            <div class="name">Motorola Edge 50 Pro (Luxe Lavender)</div>
+            <div class="price">₹29,999</div>
+            <div style="color: green; font-weight: bold; margin-top: 5px;">Bank Offer: Extra ₹2000 Off</div>
+            <button class="buy-btn">Buy Now</button>
+        </div>
     </div>
 
 </body>
