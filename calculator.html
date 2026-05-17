@@ -12,15 +12,23 @@
             user-select: none;
             -webkit-user-select: none;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
+        /* DEFAULT LIGHT MODE STYLING (As per your request) */
         body {
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #000000;
             display: flex;
             flex-direction: column;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* Dark Mode Override class */
+        body.dark-mode {
+            background-color: #000000;
+            color: #ffffff;
         }
 
         /* Top Header Section */
@@ -29,7 +37,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background-color: #000000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .brand-name {
@@ -37,6 +50,15 @@
             letter-spacing: 1px;
             color: #888888;
             font-weight: 600;
+        }
+
+        /* Three Dots Button for Settings Menu */
+        .three-dots-btn {
+            font-size: 20px;
+            cursor: pointer;
+            color: #4285f4;
+            padding: 0 5px;
+            font-weight: bold;
         }
 
         .history-btn {
@@ -52,7 +74,6 @@
             display: flex;
             justify-content: flex-end;
             padding: 0 20px 10px 20px;
-            background-color: #000000;
         }
 
         .inv-toggle-btn {
@@ -60,9 +81,13 @@
             color: #8ab4f8;
             cursor: pointer;
             font-weight: bold;
-            background-color: #1c1c1e;
+            background-color: #f1f3f4;
             padding: 6px 14px;
             border-radius: 20px;
+            border: 1px solid #dae0e2;
+        }
+        body.dark-mode .inv-toggle-btn {
+            background-color: #1c1c1e;
             border: 1px solid #2c2c2e;
         }
 
@@ -74,7 +99,6 @@
             justify-content: flex-end;
             align-items: flex-end;
             padding: 20px;
-            background-color: #000000;
         }
 
         .query-line {
@@ -89,7 +113,6 @@
         .main-display {
             font-size: 44px;
             font-weight: 400;
-            color: #ffffff;
             text-align: right;
             width: 100%;
             word-wrap: break-word;
@@ -99,10 +122,12 @@
 
         /* Main Pad Container */
         .pad-container {
-            background-color: #000000;
             padding: 12px;
-            border-top: 1px solid #111111;
+            border-top: 1px solid #e8eaed;
             position: relative;
+        }
+        body.dark-mode .pad-container {
+            border-top: 1px solid #111111;
         }
 
         /* Google Style Advanced Blue Panel Overlay */
@@ -141,45 +166,54 @@
             outline: none;
             font-size: 24px;
             font-weight: 500;
-            background-color: #1c1c1e;
-            color: #ffffff;
+            background-color: #f1f3f4;
+            color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: transform 0.05s ease, background-color 0.1s ease;
         }
+        body.dark-mode .btn {
+            background-color: #1c1c1e;
+            color: #ffffff;
+        }
 
         /* Tactile Button Press Effect */
         .btn:active {
             transform: scale(0.88);
+            background-color: #d2d4d6;
+        }
+        body.dark-mode .btn:active {
             background-color: #2c2c2e;
         }
 
         .btn-action {
+            background-color: #e8eaed;
+            color: #3c4043;
+        }
+        body.dark-mode .btn-action {
             background-color: #3a3a3c;
             color: #d1d1d6;
         }
-        .btn-action:active {
-            background-color: #4a4a4c;
-        }
 
         .btn-operator {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+        }
+        body.dark-mode .btn-operator {
             background-color: #2f3b52;
             color: #8ab4f8;
         }
-        .btn-operator:active {
-            background-color: #3f4b62;
-        }
 
         .btn-equal {
+            background-color: #1a73e8;
+            color: #ffffff;
+        }
+        body.dark-mode .btn-equal {
             background-color: #8ab4f8;
             color: #000000;
         }
-        .btn-equal:active {
-            background-color: #aecbfa;
-        }
 
-        /* Advanced Blue Panel Buttons */
         .btn-adv {
             background-color: #233d6b;
             color: #aecbfa;
@@ -187,26 +221,27 @@
             font-weight: bold;
             height: 60px;
         }
-        .btn-adv:active {
-            background-color: #2d4d85;
-        }
 
-        /* Sliding Bottom History Drawer Sheet */
+        /* History Panel */
         .history-drawer {
             position: fixed;
             top: -100%;
             left: 0;
             width: 100%;
             height: 85%;
-            background-color: #121212;
+            background-color: #f8f9fa;
             border-bottom-left-radius: 24px;
             border-bottom-right-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: top 0.35s cubic-bezier(0.15, 0.85, 0.35, 1);
             z-index: 999;
             display: flex;
             flex-direction: column;
             padding: 22px;
+        }
+        body.dark-mode .history-drawer {
+            background-color: #121212;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
         }
 
         .history-drawer.open {
@@ -218,8 +253,11 @@
             justify-content: space-between;
             align-items: center;
             padding-bottom: 15px;
-            border-bottom: 1px solid #222222;
+            border-bottom: 1px solid #dae0e2;
             margin-bottom: 15px;
+        }
+        body.dark-mode .drawer-header {
+            border-bottom: 1px solid #222222;
         }
 
         .drawer-content {
@@ -228,40 +266,170 @@
             overflow-x: hidden;
         }
 
-        /* Swipeable History Item Styling */
         .history-item {
             padding: 12px 15px;
-            border-bottom: 1px solid #1c1c1e;
+            border-bottom: 1px solid #f1f3f4;
             text-align: right;
             position: relative;
-            background-color: #121212;
             transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-            transform: translateX(0);
+        }
+        body.dark-mode .history-item {
+            border-bottom: 1px solid #1c1c1e;
         }
 
         .history-q { color: #8a8a8f; font-size: 16px; }
-        .history-a { color: #ffffff; font-size: 22px; margin-top: 5px; }
+        .history-a { font-size: 22px; margin-top: 5px; }
 
-        .close-drawer {
-            font-size: 26px;
-            color: #ff6b6b;
+        /* --- PRE-BUILT SETTINGS MODAL DIALOG --- */
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .settings-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .settings-box {
+            background-color: #ffffff;
+            color: #000000;
+            width: 85%;
+            max-width: 340px;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        body.dark-mode .settings-box {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .settings-modal.open .settings-box {
+            transform: scale(1);
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        body.dark-mode .settings-title {
+            border-bottom: 1px solid #333;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .setting-label {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .setting-control select, .setting-control input {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #000;
+            outline: none;
+        }
+        body.dark-mode .setting-control select, body.dark-mode .setting-control input {
+            border: 1px solid #444;
+            background-color: #2c2c2e;
+            color: #fff;
+        }
+
+        .setting-control input[type="number"] {
+            width: 80px;
+            text-align: center;
+        }
+
+        .close-settings-btn {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
+            float: right;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-box">
+            <div class="settings-title">⚙️ Patalix Settings</div>
+            
+            <div class="setting-row">
+                <div class="setting-label">Theme Mode</div>
+                <div class="setting-control">
+                    <select id="themeSelect" onchange="changeTheme()">
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="system">System Default</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-label">Haptic Vibration</div>
+                <div class="setting-control">
+                    <select id="vibrateSelect" onchange="toggleVibration()">
+                        <option value="off">OFF</option>
+                        <option value="on">ON</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-label">History Limit</div>
+                <div class="setting-control">
+                    <input type="number" id="historyLimitInput" min="1" placeholder="Max" oninput="changeHistoryLimit()">
+                </div>
+            </div>
+            <div style="font-size: 11px; color: #888; margin-top: -10px; margin-bottom: 15px;">Leave empty for Unlimited rows.</div>
+
+            <button class="close-settings-btn" onclick="closeSettings()">OK</button>
+        </div>
+    </div>
+
     <div id="historyDrawer" class="history-drawer">
         <div class="drawer-header">
             <span style="font-weight: bold; color: #8e8e93; font-size: 16px;">History</span>
             <span id="clearHistory" style="color: #4285f4; font-size: 15px; font-weight: bold; cursor: pointer;">Clear all</span>
-            <span class="close-drawer" id="closeDrawer">✕</span>
+            <span style="font-size: 26px; color: #ff6b6b; cursor: pointer;" id="closeDrawer">✕</span>
         </div>
         <div class="drawer-content" id="historyItems"></div>
     </div>
 
     <div class="header-bar">
-        <div class="brand-name">PATALIX CALCULATOR</div>
+        <div class="header-left">
+            <div class="brand-name">PATALIX CALCULATOR</div>
+            <div class="three-dots-btn" onclick="openSettings()">⁝</div>
+        </div>
         <div class="history-btn" id="viewHistoryBtn">History</div>
     </div>
 
@@ -281,256 +449,5 @@
                 <div style="width: 40px; height: 5px; background-color: #4b6584; border-radius: 10px; cursor: pointer;" onclick="toggleAdvancedPanel()"></div>
             </div>
             <div class="grid-row">
-                <button class="btn btn-adv" onclick="inputAdv('sin(')">sin</button>
-                <button class="btn btn-adv" onclick="inputAdv('cos(')">cos</button>
-                <button class="btn btn-adv" onclick="inputAdv('tan(')">tan</button>
-                <button class="btn btn-adv" onclick="inputAdv('log(')">log</button>
-            </div>
-            <div class="grid-row">
-                <button class="btn btn-adv" onclick="inputAdv('ln(')">ln</button>
-                <button class="btn btn-adv" onclick="inputNum('3.14159')">π</button>
-                <button class="btn btn-adv" onclick="inputNum('2.71828')">e</button>
-                <button class="btn btn-adv" onclick="inputOp('^')">^</button>
-            </div>
-            <div class="grid-row">
-                <button class="btn btn-adv" onclick="inputAdv('sqrt(')">√</button>
-                <button class="btn btn-adv" onclick="inputAdv('(')">(</button>
-                <button class="btn btn-adv" onclick="inputAdv(')')">)</button>
-                <button class="btn btn-adv" style="background-color: #ff6b6b; color: #000000;" onclick="toggleAdvancedPanel()">Close ⌄</button>
-            </div>
-        </div>
-
-        <div class="grid-row">
-            <button class="btn btn-action" onclick="clearAll()">AC</button>
-            <button class="btn btn-action" onclick="backspace()">CE</button>
-            <button class="btn btn-action" onclick="inputOp('%')">%</button>
-            <button class="btn btn-operator" onclick="inputOp('/')">÷</button>
-        </div>
-        <div class="grid-row">
-            <button class="btn" onclick="inputNum('7')">7</button>
-            <button class="btn" onclick="inputNum('8')">8</button>
-            <button class="btn" onclick="inputNum('9')">9</button>
-            <button class="btn btn-operator" onclick="inputOp('*')">×</button>
-        </div>
-        <div class="grid-row">
-            <button class="btn" onclick="inputNum('4')">4</button>
-            <button class="btn" onclick="inputNum('5')">5</button>
-            <button class="btn" onclick="inputNum('6')">6</button>
-            <button class="btn btn-operator" onclick="inputOp('-')">-</button>
-        </div>
-        <div class="grid-row">
-            <button class="btn" onclick="inputNum('1')">1</button>
-            <button class="btn" onclick="inputNum('2')">2</button>
-            <button class="btn" onclick="inputNum('3')">3</button>
-            <button class="btn btn-operator" onclick="inputOp('+')">+</button>
-        </div>
-        <div class="grid-row">
-            <button class="btn btn-action" onclick="inputNum('00')">00</button>
-            <button class="btn" onclick="inputNum('0')">0</button>
-            <button class="btn" onclick="inputNum('.')">.</button>
-            <button class="btn btn-equal" onclick="calculate()">=</button>
-        </div>
-    </div>
-
-    <script>
-        let currentInput = "0";
-        let history = JSON.parse(localStorage.getItem('calc_history')) || [];
-
-        const calcDisplay = document.getElementById('calcDisplay');
-        const queryDisplay = document.getElementById('queryDisplay');
-        const advancedPanel = document.getElementById('advancedPanel');
-        const historyDrawer = document.getElementById('historyDrawer');
-        const advToggleBtn = document.getElementById('advToggleBtn');
-        const historyItemsContainer = document.getElementById('historyItems');
-
-        function updateDisplay() {
-            calcDisplay.innerText = currentInput;
-        }
-
-        function inputNum(num) {
-            if (currentInput === "0" && num !== ".") {
-                currentInput = num;
-            } else {
-                currentInput += num;
-            }
-            updateDisplay();
-        }
-
-        function inputOp(op) {
-            let lastChar = currentInput.slice(-1);
-            if (['+','-','*','/','%','^'].includes(lastChar)) {
-                currentInput = currentInput.slice(0, -1) + op;
-            } else {
-                currentInput += op;
-            }
-            updateDisplay();
-        }
-
-        function inputAdv(val) {
-            if (currentInput === "0") {
-                currentInput = val;
-            } else {
-                currentInput += val;
-            }
-            updateDisplay();
-        }
-
-        function clearAll() {
-            currentInput = "0";
-            queryDisplay.innerText = "";
-            calcDisplay.style.fontSize = "44px";
-            updateDisplay();
-        }
-
-        function backspace() {
-            if (currentInput.length > 1) {
-                currentInput = currentInput.slice(0, -1);
-            } else {
-                currentInput = "0";
-            }
-            updateDisplay();
-        }
-
-        function toggleAdvancedPanel() {
-            advancedPanel.classList.toggle('open');
-            if(advancedPanel.classList.contains('open')) {
-                advToggleBtn.innerText = "INV ⬇";
-            } else {
-                advToggleBtn.innerText = "INV ⌃";
-            }
-        }
-
-        function calculate() {
-            let expression = currentInput;
-            let queryText = expression;
-
-            try {
-                let parseExpr = expression.replace(/×/g, '*').replace(/÷/g, '/');
-                
-                parseExpr = parseExpr.replace(/sin\(([^)]+)\)/g, (m, val) => Math.sin(parseFloat(val) * Math.PI / 180));
-                parseExpr = parseExpr.replace(/cos\(([^)]+)\)/g, (m, val) => Math.cos(parseFloat(val) * Math.PI / 180));
-                parseExpr = parseExpr.replace(/tan\(([^)]+)\)/g, (m, val) => Math.tan(parseFloat(val) * Math.PI / 180));
-                parseExpr = parseExpr.replace(/log\(([^)]+)\)/g, (m, val) => Math.log10(parseFloat(val)));
-                parseExpr = parseExpr.replace(/ln\(([^)]+)\)/g, (m, val) => Math.log(parseFloat(val)));
-                parseExpr = parseExpr.replace(/sqrt\(([^)]+)\)/g, (m, val) => Math.sqrt(parseFloat(val)));
-                
-                while(parseExpr.includes('^')) {
-                    parseExpr = parseExpr.replace(/([0-9.]+)\^([0-9.]+)/g, (m, base, exp) => Math.pow(parseFloat(base), parseFloat(exp)));
-                }
-
-                let result = eval(parseExpr);
-                
-                if (String(result).includes('.') && String(result).split('.')[1].length > 6) {
-                    result = Number(result.toFixed(6));
-                }
-
-                queryDisplay.innerText = queryText + " =";
-                saveHistory(queryText, result);
-                currentInput = String(result);
-            } catch (e) {
-                calcDisplay.innerText = "Error";
-                currentInput = "0";
-            }
-            updateDisplay();
-        }
-
-        function saveHistory(q, a) {
-            history.unshift({q: q, a: a});
-            if(history.length > 20) history.pop();
-            localStorage.setItem('calc_history', JSON.stringify(history));
-            renderHistory();
-        }
-
-        function renderHistory() {
-            if (history.length === 0) {
-                historyItemsContainer.innerHTML = '<div style="text-align:center; color:#555; margin-top:30px;">No History</div>';
-                return;
-            }
-            
-            historyItemsContainer.innerHTML = history.map((item, index) => `
-                <div class="history-item" id="item-${index}" data-index="${index}">
-                    <div class="history-q">${item.q}</div>
-                    <div class="history-a">${item.a}</div>
-                </div>
-            `).join('');
-
-            history.forEach((item, index) => {
-                let element = document.getElementById(`item-${index}`);
-                let startX = 0;
-
-                element.addEventListener('touchstart', e => {
-                    startX = e.changedTouches[0].screenX;
-                }, { passive: true });
-
-                element.addEventListener('touchmove', e => {
-                    let moveX = e.changedTouches[0].screenX;
-                    let diffX = moveX - startX;
-                    if (diffX > 0) {
-                        element.style.transform = `translateX(${diffX}px)`;
-                        element.style.opacity = `${1 - (diffX / 300)}`;
-                    }
-                }, { passive: true });
-
-                element.addEventListener('touchend', e => {
-                    let endX = e.changedTouches[0].screenX;
-                    if (endX - startX > 120) {
-                        element.style.transform = 'translateX(100%)';
-                        element.style.opacity = '0';
-                        setTimeout(() => { deleteSingleHistory(index); }, 200);
-                    } else {
-                        element.style.transform = 'translateX(0)';
-                        element.style.opacity = '1';
-                    }
-                }, { passive: true });
-            });
-        }
-
-        function deleteSingleHistory(index) {
-            history.splice(index, 1);
-            localStorage.setItem('calc_history', JSON.stringify(history));
-            renderHistory();
-        }
-
-        // --- GOOGLE CALC FULL SYSTEM GESTURES OVERLAY ---
-        let touchstartY = 0;
-        let touchendY = 0;
-
-        // Swipe Down on Main Display -> Opens History Panel
-        document.getElementById('swipeZone').addEventListener('touchstart', e => {
-            touchstartY = e.changedTouches[0].screenY;
-        }, { passive: true });
-
-        document.getElementById('swipeZone').addEventListener('touchend', e => {
-            touchendY = e.changedTouches[0].screenY;
-            if (touchendY - touchstartY > 75) {
-                historyDrawer.classList.add('open');
-            }
-        }, { passive: true });
-
-        // Swipe Up on History Panel Container -> Closes/Dismisses History Panel
-        historyItemsContainer.addEventListener('touchstart', e => {
-            touchstartY = e.changedTouches[0].screenY;
-        }, { passive: true });
-
-        historyItemsContainer.addEventListener('touchend', e => {
-            touchendY = e.changedTouches[0].screenY;
-            // Negative delta logic means sweeping fingers from bottom upwards (Swipe Up)
-            if (touchstartY - touchendY > 80) {
-                historyDrawer.classList.remove('open');
-                calcDisplay.style.fontSize = "44px";
-            }
-        }, { passive: true });
-
-        document.getElementById('viewHistoryBtn').addEventListener('click', () => historyDrawer.classList.add('open'));
-        document.getElementById('closeDrawer').addEventListener('click', () => historyDrawer.classList.remove('open'));
-        
-        document.getElementById('clearHistory').addEventListener('click', () => {
-            history = [];
-            localStorage.removeItem('calc_history');
-            renderHistory();
-        });
-
-        renderHistory();
-    </script>
-</body>
-</html>
+                <button class="btn btn-adv" onclick="triggerBtn('sin(')">sin</button>
+                <button class
