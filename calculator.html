@@ -47,6 +47,25 @@
             padding: 5px 10px;
         }
 
+        /* Sub-Header bar for INV Button */
+        .sub-header-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 20px 10px 20px;
+            background-color: #000000;
+        }
+
+        .inv-toggle-btn {
+            font-size: 14px;
+            color: #8ab4f8;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #1c1c1e;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #2c2c2e;
+        }
+
         /* Fullscreen Fixed Display Panel */
         .display-container {
             flex: 1;
@@ -54,9 +73,8 @@
             flex-direction: column;
             justify-content: flex-end;
             align-items: flex-end;
-            padding: 25px 20px;
+            padding: 20px;
             background-color: #000000;
-            min-height: 160px;
         }
 
         .query-line {
@@ -76,26 +94,48 @@
             width: 100%;
             word-wrap: break-word;
             overflow-y: auto;
-            max-height: 120px;
+            max-height: 100px;
         }
 
-        /* Tactile Mechanical Grid System */
+        /* Main Pad Container */
         .pad-container {
             background-color: #000000;
             padding: 12px;
             border-top: 1px solid #111111;
+            position: relative;
+        }
+
+        /* Google Style Advanced Blue Panel Overlay */
+        .advanced-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #172b4d;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 50;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .advanced-panel.open {
+            transform: translateY(0);
         }
 
         .grid-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .btn {
             flex: 1;
-            margin: 6px;
-            height: 72px;
+            margin: 5px;
+            height: 68px;
             border-radius: 50px;
             border: none;
             outline: none;
@@ -109,7 +149,7 @@
             transition: transform 0.05s ease, background-color 0.1s ease;
         }
 
-        /* True Mechanical Button Press Effect */
+        /* Tactile Button Press Effect */
         .btn:active {
             transform: scale(0.88);
             background-color: #2c2c2e;
@@ -131,23 +171,24 @@
             background-color: #3f4b62;
         }
 
-        .btn-ai {
-            background-color: #3b2323;
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-        .btn-ai.active {
-            background-color: #ff6b6b;
-            color: #000000;
-            box-shadow: 0 0 15px #ff6b6b;
-        }
-
         .btn-equal {
             background-color: #8ab4f8;
             color: #000000;
         }
         .btn-equal:active {
             background-color: #aecbfa;
+        }
+
+        /* Advanced Blue Panel Buttons */
+        .btn-adv {
+            background-color: #233d6b;
+            color: #aecbfa;
+            font-size: 18px;
+            font-weight: bold;
+            height: 60px;
+        }
+        .btn-adv:active {
+            background-color: #2d4d85;
         }
 
         /* Sliding Bottom History Drawer Sheet */
@@ -184,12 +225,18 @@
         .drawer-content {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
+        /* Swipeable History Item Styling */
         .history-item {
-            padding: 12px 0;
+            padding: 12px 15px;
             border-bottom: 1px solid #1c1c1e;
             text-align: right;
+            position: relative;
+            background-color: #121212;
+            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+            transform: translateX(0);
         }
 
         .history-q { color: #8a8a8f; font-size: 16px; }
@@ -218,12 +265,41 @@
         <div class="history-btn" id="viewHistoryBtn">History</div>
     </div>
 
+    <div class="sub-header-bar">
+        <div class="inv-toggle-btn" id="advToggleBtn" onclick="toggleAdvancedPanel()">INV ⌃</div>
+    </div>
+
     <div class="display-container" id="swipeZone">
         <div class="query-line" id="queryDisplay"></div>
         <div class="main-display" id="calcDisplay">0</div>
     </div>
 
     <div class="pad-container">
+        
+        <div class="advanced-panel" id="advancedPanel">
+            <div class="grid-row" style="justify-content: center; margin-bottom: 5px;">
+                <div style="width: 40px; height: 5px; background-color: #4b6584; border-radius: 10px; cursor: pointer;" onclick="toggleAdvancedPanel()"></div>
+            </div>
+            <div class="grid-row">
+                <button class="btn btn-adv" onclick="inputAdv('sin(')">sin</button>
+                <button class="btn btn-adv" onclick="inputAdv('cos(')">cos</button>
+                <button class="btn btn-adv" onclick="inputAdv('tan(')">tan</button>
+                <button class="btn btn-adv" onclick="inputAdv('log(')">log</button>
+            </div>
+            <div class="grid-row">
+                <button class="btn btn-adv" onclick="inputAdv('ln(')">ln</button>
+                <button class="btn btn-adv" onclick="inputNum('3.14159')">π</button>
+                <button class="btn btn-adv" onclick="inputNum('2.71828')">e</button>
+                <button class="btn btn-adv" onclick="inputOp('^')">^</button>
+            </div>
+            <div class="grid-row">
+                <button class="btn btn-adv" onclick="inputAdv('sqrt(')">√</button>
+                <button class="btn btn-adv" onclick="inputAdv('(')">(</button>
+                <button class="btn btn-adv" onclick="inputAdv(')')">)</button>
+                <button class="btn btn-adv" style="background-color: #ff6b6b; color: #000000;" onclick="toggleAdvancedPanel()">Close ⌄</button>
+            </div>
+        </div>
+
         <div class="grid-row">
             <button class="btn btn-action" onclick="clearAll()">AC</button>
             <button class="btn btn-action" onclick="backspace()">CE</button>
@@ -249,7 +325,7 @@
             <button class="btn btn-operator" onclick="inputOp('+')">+</button>
         </div>
         <div class="grid-row">
-            <button class="btn btn-ai" id="aiBtn" onclick="toggleAiMode()">AI</button>
+            <button class="btn btn-action" onclick="inputNum('00')">00</button>
             <button class="btn" onclick="inputNum('0')">0</button>
             <button class="btn" onclick="inputNum('.')">.</button>
             <button class="btn btn-equal" onclick="calculate()">=</button>
@@ -258,13 +334,14 @@
 
     <script>
         let currentInput = "0";
-        let isAiMode = false;
         let history = JSON.parse(localStorage.getItem('calc_history')) || [];
 
         const calcDisplay = document.getElementById('calcDisplay');
         const queryDisplay = document.getElementById('queryDisplay');
-        const aiBtn = document.getElementById('aiBtn');
+        const advancedPanel = document.getElementById('advancedPanel');
         const historyDrawer = document.getElementById('historyDrawer');
+        const advToggleBtn = document.getElementById('advToggleBtn');
+        const historyItemsContainer = document.getElementById('historyItems');
 
         function updateDisplay() {
             calcDisplay.innerText = currentInput;
@@ -280,12 +357,20 @@
         }
 
         function inputOp(op) {
-            if (isAiMode) return;
             let lastChar = currentInput.slice(-1);
-            if (['+','-','*','/','%'].includes(lastChar)) {
+            if (['+','-','*','/','%','^'].includes(lastChar)) {
                 currentInput = currentInput.slice(0, -1) + op;
             } else {
                 currentInput += op;
+            }
+            updateDisplay();
+        }
+
+        function inputAdv(val) {
+            if (currentInput === "0") {
+                currentInput = val;
+            } else {
+                currentInput += val;
             }
             updateDisplay();
         }
@@ -306,135 +391,47 @@
             updateDisplay();
         }
 
-        function toggleAiMode() {
-            isAiMode = !isAiMode;
-            if (isAiMode) {
-                aiBtn.classList.add('active');
-                queryDisplay.innerText = "AI Mode Active";
-                currentInput = "";
-                let textQuery = prompt("Ask Patalix AI or Math Formula:");
-                if (textQuery) {
-                    currentInput = textQuery;
-                } else {
-                    isAiMode = false;
-                    aiBtn.classList.remove('active');
-                    currentInput = "0";
-                }
+        function toggleAdvancedPanel() {
+            advancedPanel.classList.toggle('open');
+            if(advancedPanel.classList.contains('open')) {
+                advToggleBtn.innerText = "INV ⬇";
             } else {
-                aiBtn.classList.remove('active');
-                currentInput = "0";
-                queryDisplay.innerText = "";
+                advToggleBtn.innerText = "INV ⌃";
             }
-            updateDisplay();
         }
 
         function calculate() {
-            let processedInput = currentInput.trim().toLowerCase();
+            let expression = currentInput;
+            let queryText = expression;
 
-            // OFFLINE MATH FORMULA DATABASE (Zero API, Completely Offline)
-            if (processedInput.includes("a+b") && (processedInput.includes("square") || processedInput.includes("2"))) {
-                showOfflineMath("(a + b) Square", "a2 + 2ab + b2"); return;
-            }
-            if (processedInput.includes("a-b") && (processedInput.includes("square") || processedInput.includes("2"))) {
-                showOfflineMath("(a - b) Square", "a2 - 2ab + b2"); return;
-            }
-            if (processedInput.includes("pythagoras") || processedInput.includes("lamb") || processedInput.includes("karn")) {
-                showOfflineMath("Pythagoras Theorem", "Karn2 = Lamb2 + Aadhar2"); return;
-            }
-            if (processedInput.includes("circle") || processedInput.includes("area")) {
-                showOfflineMath("Area of Circle", "pi * r * r (pi = 3.14159)"); return;
-            }
-            if (processedInput.startsWith("sin") || processedInput.startsWith("cos") || processedInput.startsWith("tan")) {
-                parseOfflineTrig(processedInput); return;
-            }
-
-            // ONLINE GENERAL KNOWLEDGE FETCH SYSTEM (No API Keys Used)
-            if (isAiMode) {
-                fetchOnlineGk(currentInput);
-                return;
-            }
-
-            // NATIVE MATHEMATICS ENGINE
             try {
-                let sanitizedExpression = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
-                let result = eval(sanitizedExpression);
-                queryDisplay.innerText = currentInput + " =";
-                saveHistory(currentInput, result);
+                let parseExpr = expression.replace(/×/g, '*').replace(/÷/g, '/');
+                
+                parseExpr = parseExpr.replace(/sin\(([^)]+)\)/g, (m, val) => Math.sin(parseFloat(val) * Math.PI / 180));
+                parseExpr = parseExpr.replace(/cos\(([^)]+)\)/g, (m, val) => Math.cos(parseFloat(val) * Math.PI / 180));
+                parseExpr = parseExpr.replace(/tan\(([^)]+)\)/g, (m, val) => Math.tan(parseFloat(val) * Math.PI / 180));
+                parseExpr = parseExpr.replace(/log\(([^)]+)\)/g, (m, val) => Math.log10(parseFloat(val)));
+                parseExpr = parseExpr.replace(/ln\(([^)]+)\)/g, (m, val) => Math.log(parseFloat(val)));
+                parseExpr = parseExpr.replace(/sqrt\(([^)]+)\)/g, (m, val) => Math.sqrt(parseFloat(val)));
+                
+                while(parseExpr.includes('^')) {
+                    parseExpr = parseExpr.replace(/([0-9.]+)\^([0-9.]+)/g, (m, base, exp) => Math.pow(parseFloat(base), parseFloat(exp)));
+                }
+
+                let result = eval(parseExpr);
+                
+                if (String(result).includes('.') && String(result).split('.')[1].length > 6) {
+                    result = Number(result.toFixed(6));
+                }
+
+                queryDisplay.innerText = queryText + " =";
+                saveHistory(queryText, result);
                 currentInput = String(result);
             } catch (e) {
                 calcDisplay.innerText = "Error";
                 currentInput = "0";
             }
             updateDisplay();
-        }
-
-        function showOfflineMath(formulaName, structuralExpansion) {
-            queryDisplay.innerText = formulaName;
-            calcDisplay.style.fontSize = "22px";
-            calcDisplay.innerText = structuralExpansion;
-            saveHistory(formulaName, structuralExpansion);
-            isAiMode = false;
-            aiBtn.classList.remove('active');
-        }
-
-        function parseOfflineTrig(input) {
-            try {
-                let match = input.match(/(sin|cos|tan)\(([^)]+)\)/) || input.match(/(sin|cos|tan)\s*([0-9.]+)/);
-                if (match) {
-                    let func = match[1];
-                    let val = parseFloat(match[2]);
-                    let rad = val * (Math.PI / 180);
-                    let res = 0;
-                    
-                    if (func === "sin") res = Math.sin(rad);
-                    if (func === "cos") res = Math.cos(rad);
-                    if (func === "tan") res = Math.tan(rad);
-                    
-                    let finalVal = Number(res.toFixed(5));
-                    queryDisplay.innerText = func + "(" + val + "deg)";
-                    calcDisplay.style.fontSize = "44px";
-                    calcDisplay.innerText = finalVal;
-                    saveHistory(func + "(" + val + "deg)", finalVal);
-                } else {
-                    calcDisplay.innerText = "Format: sin(45)";
-                }
-            } catch(e) {
-                calcDisplay.innerText = "Trig Error";
-            }
-            isAiMode = false;
-            aiBtn.classList.remove('active');
-        }
-
-        function fetchOnlineGk(question) {
-            if (!question.trim()) return;
-            calcDisplay.innerText = "Searching Public DB...";
-            
-            let url = "https://api.duckduckgo.com/?q=" + encodeURIComponent(question) + "&format=json&no_html=1";
-
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    let answer = "";
-                    if (data.AbstractText) {
-                        answer = data.AbstractText;
-                    } else if (data.RelatedTopics && data.RelatedTopics.length > 0) {
-                        answer = data.RelatedTopics[0].Text;
-                    } else {
-                        answer = "Public Domain: Details not found online right now.";
-                    }
-                    queryDisplay.innerText = "Q: " + question;
-                    calcDisplay.style.fontSize = "20px";
-                    calcDisplay.innerText = answer;
-                    saveHistory("Q: " + question, answer);
-                    isAiMode = false;
-                    aiBtn.classList.remove('active');
-                })
-                .catch(err => {
-                    queryDisplay.innerText = "Extraction failed";
-                    calcDisplay.innerText = "Offline Mode Error";
-                    isAiMode = false;
-                    aiBtn.classList.remove('active');
-                });
         }
 
         function saveHistory(q, a) {
@@ -445,37 +442,88 @@
         }
 
         function renderHistory() {
-            const container = document.getElementById('historyItems');
-            container.innerHTML = history.map(item => 
-                '<div class="history-item"><div class="history-q">' + item.q + '</div><div class="history-a">' + item.a + '</div></div>'
-            ).join('');
+            if (history.length === 0) {
+                historyItemsContainer.innerHTML = '<div style="text-align:center; color:#555; margin-top:30px;">No History</div>';
+                return;
+            }
+            
+            historyItemsContainer.innerHTML = history.map((item, index) => `
+                <div class="history-item" id="item-${index}" data-index="${index}">
+                    <div class="history-q">${item.q}</div>
+                    <div class="history-a">${item.a}</div>
+                </div>
+            `).join('');
+
+            history.forEach((item, index) => {
+                let element = document.getElementById(`item-${index}`);
+                let startX = 0;
+
+                element.addEventListener('touchstart', e => {
+                    startX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                element.addEventListener('touchmove', e => {
+                    let moveX = e.changedTouches[0].screenX;
+                    let diffX = moveX - startX;
+                    if (diffX > 0) {
+                        element.style.transform = `translateX(${diffX}px)`;
+                        element.style.opacity = `${1 - (diffX / 300)}`;
+                    }
+                }, { passive: true });
+
+                element.addEventListener('touchend', e => {
+                    let endX = e.changedTouches[0].screenX;
+                    if (endX - startX > 120) {
+                        element.style.transform = 'translateX(100%)';
+                        element.style.opacity = '0';
+                        setTimeout(() => { deleteSingleHistory(index); }, 200);
+                    } else {
+                        element.style.transform = 'translateX(0)';
+                        element.style.opacity = '1';
+                    }
+                }, { passive: true });
+            });
         }
 
-        // Swipe Gesture Module Configuration
+        function deleteSingleHistory(index) {
+            history.splice(index, 1);
+            localStorage.setItem('calc_history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        // --- GOOGLE CALC FULL SYSTEM GESTURES OVERLAY ---
         let touchstartY = 0;
         let touchendY = 0;
-        const swipeZone = document.getElementById('swipeZone');
 
-        swipeZone.addEventListener('touchstart', e => {
+        // Swipe Down on Main Display -> Opens History Panel
+        document.getElementById('swipeZone').addEventListener('touchstart', e => {
             touchstartY = e.changedTouches[0].screenY;
         }, { passive: true });
 
-        swipeZone.addEventListener('touchend', e => {
+        document.getElementById('swipeZone').addEventListener('touchend', e => {
             touchendY = e.changedTouches[0].screenY;
-            handleGesture();
-        }, { passive: true });
-
-        function handleGesture() {
             if (touchendY - touchstartY > 75) {
                 historyDrawer.classList.add('open');
             }
-        }
+        }, { passive: true });
+
+        // Swipe Up on History Panel Container -> Closes/Dismisses History Panel
+        historyItemsContainer.addEventListener('touchstart', e => {
+            touchstartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        historyItemsContainer.addEventListener('touchend', e => {
+            touchendY = e.changedTouches[0].screenY;
+            // Negative delta logic means sweeping fingers from bottom upwards (Swipe Up)
+            if (touchstartY - touchendY > 80) {
+                historyDrawer.classList.remove('open');
+                calcDisplay.style.fontSize = "44px";
+            }
+        }, { passive: true });
 
         document.getElementById('viewHistoryBtn').addEventListener('click', () => historyDrawer.classList.add('open'));
-        document.getElementById('closeDrawer').addEventListener('click', () => {
-            historyDrawer.classList.remove('open');
-            calcDisplay.style.fontSize = "44px";
-        });
+        document.getElementById('closeDrawer').addEventListener('click', () => historyDrawer.classList.remove('open'));
+        
         document.getElementById('clearHistory').addEventListener('click', () => {
             history = [];
             localStorage.removeItem('calc_history');
